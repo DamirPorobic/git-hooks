@@ -4,4 +4,4 @@ Collection of useful git hooks
 # Usage
 Just add the hook script to your `.git/hooks/` directory
 
-Hooks can be skipped with ´--no-verify´ 
+Hooks can be skipped with `--no-verify` 
