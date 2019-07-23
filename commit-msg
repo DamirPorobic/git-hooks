@@ -1,11 +1,22 @@
 #!/bin/bash
 #
-# Replace specific placeholder text in a commit message.
-# This operation is always successful.
+# 1. Replace specific placeholder text in a commit message.
+# 2. Check for Jira issue in commit message.
 #
 
 PLACE_HOLDER="#"
-REPLACE_WITH="DAIMKTDB-"
+JIRA_PREFIX="YOUR-TEXT-HERE"
+COMMIT_REGEX='('${JIRA_PREFIX}'[0-9]+|merge)'
+ERROR_MESSAGE="Aborting commit. Your commit message is missing either a JIRA Issue ('${JIRA_PREFIX}1111') or 'Merge'"
 
-sed -i "s/$PLACE_HOLDER/$REPLACE_WITH/g" $1
+
+# 1. Replace specific placeholder text in a commit message.
+sed -i "s/$PLACE_HOLDER/$JIRA_PREFIX/g" $1
+
+
+# 2. Check for Jira issue in commit message
+if ! grep -iqE "$COMMIT_REGEX" "$1"; then
+    echo "$ERROR_MESSAGE" >&2
+    exit 1
+fi
 
