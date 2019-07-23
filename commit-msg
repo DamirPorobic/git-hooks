@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Replace specific placeholder text in a commit message.
+# This operation is always successful.
+#
+
+PLACE_HOLDER="#"
+REPLACE_WITH="DAIMKTDB-"
+
+sed -i "s/$PLACE_HOLDER/$REPLACE_WITH/g" $1
+
